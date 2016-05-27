@@ -1,0 +1,326 @@
+.dialog-pane:no-header .graphic-container {
+    -fx-padding: 0,0,0,0; /* 10px 0px 0px 10px */
+}
+
+/******************************************************************************/
+/*                                    TEXTO                                   */
+/******************************************************************************/
+//// Fonte
+.texto-fonte-padrao {
+    -fx-font-family: "RobotoDraft";
+}
+
+//// Tamanho
+.texto-tamanho-pequeno {
+    -fx-font-size: 12px;
+}
+.texto-tamanho-medio {
+    -fx-font-size: 14px;
+}
+.texto-tamanho-grande {
+    -fx-font-size: 16px;
+}
+
+//// Cor
+.texto-cor-preto {
+    -fx-text-fill: #000000;
+}
+.texto-cor-branco {
+    -fx-text-fill: #FFFFFF;
+}
+.texto-cor-vermelho {
+    -fx-text-fill: #F44336;
+}
+.texto-cor-azul {
+    -fx-text-fill: #2196F3;
+}
+.texto-cor-verde {
+    -fx-text-fill: #4CAF50;
+}
+.texto-cor-cinza {
+    -fx-text-fill: #9E9E9E;
+}
+
+//// Tipo
+.texto-tipo-normal {
+    -fx-font-weight: normal;
+}
+.texto-tipo-negrito {
+    -fx-font-weight: bold;
+}
+.texto-tipo-italico {
+    -fx-font-style: italic;
+}
+
+//// Sombra
+.texto-sombra-padrao {
+    -fx-effect: dropshadow( gaussian, rgba(0,0,0,0.1), 2, 0, 1, 1);
+}
+
+/******************************************************************************/
+/*                                   BORDAS                                   */
+/******************************************************************************/
+///// Raio da borda
+.borda-raio-padrao {
+    -fx-border-radius: 2px;
+}
+.borda-raio-sem {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+/******************************************************************************/
+/*                                   CORES                                    */
+/******************************************************************************/
+////// Fundo
+.fundo-preto {
+    -fx-background-color: #000000;
+}
+.fundo-branco {
+    -fx-background-color: #FFFFFF;
+}
+.fundo-vermelho {
+    -fx-background-color: #F44336;
+}
+.fundo-azul {
+    -fx-background-color: #2196F3;
+}
+.fundo-verde {
+    -fx-background-color: #4CAF50;
+}
+.fundo-cinza {
+    -fx-background-color: #9E9E9E;
+}
+
+
+/******************************************************************************/
+/*                                  BOTÕES                                    */
+/******************************************************************************/
+.botao {
+    -fx-font-family: "RobotoDraft";
+    -fx-font-weight: bold;
+}
+
+.botao-levantado {
+    -fx-effect: dropshadow( gaussian, rgba(0,0,0,0.3), 9, 0, 0, 4);
+}
+.botao-levantado:hover {
+    -fx-effect: dropshadow( gaussian, rgba(0,0,0,0.4), 15, 0, 0, 4);
+}
+.botao-levantado:pressed {
+    -fx-effect: dropshadow( gaussian, rgba(0,0,0,0.5), 9, 0, 0, 4);
+}
+
+//// Cores
+.botao-fundo-cor-vermelho {
+    -fx-background-color: #F44336;
+}
+.botao-fundo-cor-vermelho:hover {
+    -fx-background-color: #EF5350;
+}
+.botao-fundo-cor-vermelho:pressed {
+    -fx-background-color: #E53935;
+}
+.botao-fundo-cor-cinza {
+   -fx-background-color: #9E9E9E;
+}
+.botao-fundo-cor-cinza:hover {
+   -fx-background-color: #BDBDBD;
+}
+.botao-fundo-cor-cinza:pressed {
+   -fx-background-color: #757575;
+}
+.botao-fundo-cor-azul {
+    -fx-background-color: #2196F3;
+}
+.botao-fundo-cor-azul:hover {
+    -fx-background-color: #42A5F5;
+}
+.botao-fundo-cor-azul:pressed {
+    -fx-background-color: #1E88E5;
+}
+.botao-fundo-cor-verde {
+    -fx-background-color: #4CAF50;
+}
+.botao-fundo-cor-verde:hover {
+    -fx-background-color: #66BB6A;
+}
+.botao-fundo-cor-verde:pressed {
+    -fx-background-color: #43A047;
+}
+.botao-fundo-cor-branco {
+    -fx-background-color: #ffffff;
+}
+.botao-fundo-cor-branco:hover {
+    -fx-background-color: #EEEEEE;
+}
+.botao-fundo-cor-branco:pressed {
+    -fx-background-color: #EEEEEE;
+}
+
+
+/******************************************************************************/
+/*                                 TITLEPANE                                  */
+/******************************************************************************/
+.painel-rotulado {
+    -fx-font-family: "RobotoDraft";
+    //-fx-font-weight: bold;
+}
+
+.painel-rotulado-levantado {
+    -fx-effect: dropshadow( gaussian, rgba(0,0,0,0.3), 9, 0, 0, 4);
+}
+.painel-rotulado-levantado:hover {
+    -fx-effect: dropshadow( gaussian, rgba(0,0,0,0.4), 15, 0, 0, 4);
+}
+.painel-rotulado-levantado:pressed {
+    -fx-effect: dropshadow( gaussian, rgba(0,0,0,0.5), 9, 0, 0, 4);
+}
+
+//// Cores
+.painel-rotulado-fundo-cor-vermelho {
+    -fx-color: #F44336;
+}
+.painel-rotulado-fundo-cor-vermelho:hover {
+    -fx-color: #EF5350;
+}
+.painel-rotulado-fundo-cor-vermelho:pressed {
+    -fx-color: #E53935;
+}
+.painel-rotulado-fundo-cor-cinza {
+   -fx-color: #9E9E9E;
+}
+.painel-rotulado-fundo-cor-cinza:hover {
+   -fx-color: #BDBDBD;
+}
+.painel-rotulado-fundo-cor-cinza:pressed {
+   -fx-color: #757575;
+}
+.painel-rotulado-fundo-cor-azul {
+    -fx-color: #2196F3;
+}
+.painel-rotulado-fundo-cor-azul:hover {
+    -fx-color: #42A5F5;
+}
+.painel-rotulado-fundo-cor-azul:pressed {
+    -fx-color: #1E88E5;
+}
+.painel-rotulado-fundo-cor-verde {
+    -fx-color: #4CAF50;
+}
+.painel-rotulado-fundo-cor-verde:hover {
+    -fx-color: #66BB6A;
+}
+.painel-rotulado-fundo-cor-verde:focused {
+    -fx-color: #66BB6A;
+}
+.painel-rotulado-fundo-cor-verde:pressed {
+    -fx-color: #43A047;
+}
+.painel-rotulado-fundo-cor-branco {
+    -fx-color: #ffffff;
+}
+.painel-rotulado-fundo-cor-branco:hover {
+    -fx-color: #EEEEEE;
+}
+.painel-rotulado-fundo-cor-branco:pressed {
+    -fx-color: #EEEEEE;
+}
+
+
+ /* Card, Dialog */
+.card, .dialog {
+    -fx-background-color: #FFFFFF;
+}
+
+.card.raised, .dialog.raised {
+    -fx-effect: dropshadow( gaussian, rgba(0,0,0,0.24), 15, 0, 0, 8);
+}
+
+/* Input Text */
+
+.entrada {
+    -fx-background-color: transparent, -fx-text-box-border, -fx-control-inner-background;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: grey;
+    -fx-font-family: "RobotoDraft";
+    -fx-font-style: normal;
+}
+
+.entrada.error {
+    -fx-focus-color: #d35244;
+    -fx-faint-focus-color: #d3524422;
+
+    -fx-highlight-fill: -fx-accent;
+    -fx-highlight-text-fill: white;
+    -fx-background-color:
+        -fx-focus-color,
+        -fx-control-inner-background,
+        -fx-faint-focus-color,
+        linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);
+    -fx-background-insets: -0.2, 1, -1.4, 3;
+    -fx-background-radius: 3, 2, 4, 0;
+    -fx-prompt-text-fill: transparent;
+}
+
+.entrada.error:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-border-width: 0 0 3 0;
+    -fx-border-color: black;
+}
+
+.entrada-cor-vermelho {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #F44336;
+}
+
+.entrada-cor-vermelho:focused {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #EF5350;
+}
+
+.entrada-cor-azul {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #2196F3;
+}
+
+.entrada-cor-azul:focused {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #42A5F5;
+}
+
+.entrada-cor-preto {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #F44336;
+}
+
+.entrada-cor-preto:focused {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #EF5350;
+}
+
+.entrada-cor-verde {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #4CAF50;
+}
+
+.entrada-cor-verde:focused {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #66BB6A;
+}
+
+.entrada-cor-cinza {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #9E9E9E;
+}
+
+.entrada-cor-cinza:focused {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #BDBDBD;
+}
+
+.accordion > .titled-pane:hover > .title {
+    -fx-color: -fx-hover-base;
+    -fx-background-color: #66BB6A;
+}
