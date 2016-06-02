@@ -9,11 +9,7 @@ import model.LocalApplicationInfo;
 import model.RemoteApplicationInfo;
 import tools.FileManager;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 
 /**
@@ -39,7 +35,7 @@ public class Updater {
             else{
                 is = true;
                 keyInfo = new LocalApplicationInfo();
-                keyInfo.setJar_name(remoteInfo.get(key).getJar_name());
+                keyInfo.setFile_name(remoteInfo.get(key).getFile_name());
                 keyInfo.setNeed_update(true);
                 this.needsUpdate(keyInfo, remoteInfo.get(key));
                 localInfo.put(key, keyInfo);
@@ -50,9 +46,9 @@ public class Updater {
 
     public boolean needsUpdate(LocalApplicationInfo local, RemoteApplicationInfo remote){
         Gson gson = new Gson();
-        remote.setVersion(gson.fromJson(this.getRequest(remote.getName_url()), String.class));
+        remote.setVersion(gson.fromJson(this.getRequest(remote.getVersion_url()), String.class));
         if(remote.getVersion() != null) {
-            return (remote.getVersion().compareTo(local.getJar_version()) == 0 ? false : true);
+            return (remote.getVersion().compareTo(local.getVersion()) == 0 ? false : true);
         }
         else{
             //Remote é nulo quando o servidor não foram lançadas releases
@@ -61,10 +57,10 @@ public class Updater {
     }
 
     public void update(LocalApplicationInfo local, RemoteApplicationInfo remote) throws IOException {
-        Gson gson = new Gson();
-        String downloadURL = gson.fromJson(this.getRequest(remote.getLast_url()), String.class);
-        FileManager.getInstance().save(downloadURL, local.getJar_name());
-        local.setJar_version(remote.getVersion());
+        String downloadURL = FileManager.getInstance().parseJson(this.getRequest(remote.getDownload_url()), new TypeToken<String>(){}.getType());
+        //String downloadURL = FileManager.getInstance().loadJsonAndParse(remote.getDownload_url(), );
+        FileManager.getInstance().save(downloadURL, local.getFile_name());
+        local.setVersion(remote.getVersion());
     }
 
     private String getRequest(String url) {
@@ -90,10 +86,6 @@ public class Updater {
     }
 
     public void saveLocalInfo(HashMap<String, LocalApplicationInfo> info) throws IOException {
-        Gson gson = new Gson();
-        Type type = new TypeToken<HashMap<String, LocalApplicationInfo>>(){}.getType();
-        String str = gson.toJson(info, type);
-        InputStream is = new ByteArrayInputStream(Charset.forName("UTF-8").encode(str).array());
-        FileManager.getInstance().save(is, FileManager.localApplicationInfoFile);
+        FileManager.getInstance().saveToJson(Controller.getInstance().getConfig().local_data_location, info, new TypeToken<HashMap<String, LocalApplicationInfo>>(){}.getType());
     }
 }

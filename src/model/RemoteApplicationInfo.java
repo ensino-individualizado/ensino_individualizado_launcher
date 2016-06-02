@@ -4,33 +4,33 @@ package model;
  * Created by Gustavo Freitas on 26/05/2016.
  */
 public class RemoteApplicationInfo implements Comparable<RemoteApplicationInfo>{
-    private String jar_name = "";
-    private String name_url = "";
-    private String last_url = "";
+    private String file_name = "";
+    private String version_url = "";
+    private String download_url = "";
     private transient String version  = "";
 
-    public String getJar_name() {
-        return jar_name;
+    public String getFile_name() {
+        return file_name;
     }
 
-    public void setJar_name(String jar_name) {
-        this.jar_name = jar_name;
+    public void setFile_name(String file_name) {
+        this.file_name = file_name;
     }
 
-    public String getName_url() {
-        return name_url;
+    public String getVersion_url() {
+        return version_url;
     }
 
-    public void setName_url(String name_url) {
-        this.name_url = name_url;
+    public void setVersion_url(String version_url) {
+        this.version_url = version_url;
     }
 
-    public String getLast_url() {
-        return last_url;
+    public String getDownload_url() {
+        return download_url;
     }
 
-    public void setLast_url(String info_url) {
-        this.last_url = info_url;
+    public void setDownload_url(String info_url) {
+        this.download_url = info_url;
     }
 
     public String getVersion() {
@@ -42,13 +42,13 @@ public class RemoteApplicationInfo implements Comparable<RemoteApplicationInfo>{
     }
 
     public String toString(){
-        return ("jar_name:"+this.jar_name+"\n" +
-                "name_url:"+this.name_url+"\n" +
-                "last_url:"+this.last_url+"\n");
+        return ("file_name:"+this.file_name+"\n" +
+                "version_url:"+this.version_url+"\n" +
+                "download_url:"+this.download_url+"\n");
     }
 
     @Override
     public int compareTo(RemoteApplicationInfo o) {
-        return (this.jar_name.compareTo(o.getJar_name()));
+        return (this.file_name.compareTo(o.getFile_name()));
     }
 }

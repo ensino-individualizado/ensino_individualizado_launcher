@@ -6,7 +6,7 @@
 package main;
 
 import Visao.Administracao.AdministracaoController;
-import control.LauncherMainController;
+import control.Controller;
 import javafx.application.Platform;
 import javafx.stage.StageStyle;
 import Visao.ControllerHierarchy.WindowController;
@@ -21,7 +21,6 @@ import java.io.IOException;
 public class LauncherWindow extends WindowController{
 
     private static String launchAtEnd;
-    LauncherMainController launcherMainController = null;
 
     public static void main(String[] args) throws Exception {
 
@@ -44,19 +43,19 @@ public class LauncherWindow extends WindowController{
         super.show();
         new Thread(() -> {
             try {
-                LauncherMainController.getInstance().startApplication((AdministracaoController)this.getRegionController());
+                Controller.getInstance().startApplication((AdministracaoController)this.getRegionController());
             } catch (Exception e) {
                 e.printStackTrace();
                 Platform.exit();
             }
             finally {
                 try {
-                    Runtime.getRuntime().exec("java -jar " + LauncherWindow.launchAtEnd);
+                    Runtime.getRuntime().exec(Controller.getInstance().getConfig().launch_prefix + " " + LauncherWindow.launchAtEnd + " " + Controller.getInstance().getConfig().application_arguments);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Platform.exit();
             }
+            Platform.exit();
         }).start();
     }
 

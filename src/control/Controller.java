@@ -9,6 +9,7 @@ import Visao.Administracao.AdministracaoController;
 import Visao.utils.AlertUtils;
 import com.google.gson.reflect.TypeToken;
 import javafx.application.Platform;
+import model.Config;
 import model.LocalApplicationInfo;
 import model.RemoteApplicationInfo;
 import tools.FileManager;
@@ -20,21 +21,24 @@ import java.util.HashMap;
  *
  * @author Gustavo Freitas
  */
-public class LauncherMainController {
+public class Controller {
 
+    private Config config;
     private final Updater updater = new Updater();
-    private static LauncherMainController instance = new LauncherMainController();
+    private static Controller instance = new Controller();
 
     public void startApplication(AdministracaoController aplicacao) throws Exception {
         Platform.runLater(() ->{
             aplicacao.setInfoString("Carregando arquivos de configuração...");
         });
 
+        this.config = FileManager.getInstance().loadJsonAndParse(FileManager.configurationFile, new TypeToken<Config>(){}.getType());
+
         HashMap<String, LocalApplicationInfo> localInfo =
-                FileManager.getInstance().loadJsonAndParse(FileManager.localApplicationInfoFile, new TypeToken<HashMap<String, LocalApplicationInfo>>(){}.getType());
+                FileManager.getInstance().loadJsonAndParse(config.local_data_location, new TypeToken<HashMap<String, LocalApplicationInfo>>(){}.getType());
 
         HashMap<String, RemoteApplicationInfo> remoteInfo =
-                FileManager.getInstance().loadJsonAndParse(FileManager.remoteApplicationRessources, new TypeToken<HashMap<String, RemoteApplicationInfo>>(){}.getType());
+                FileManager.getInstance().loadJsonAndParse(config.remote_data_location, new TypeToken<HashMap<String, RemoteApplicationInfo>>(){}.getType());
 
         if(remoteInfo == null){
             throw new Exception("Arquivo de configurações não encontrado.");
@@ -69,16 +73,16 @@ public class LauncherMainController {
 
         for(LocalApplicationInfo info : localInfo.values()){
             Platform.runLater(() -> {
-                aplicacao.setInfoString("Baixando " + info.getJar_name() + "...");
+                aplicacao.setInfoString("Baixando " + info.getFile_name() + "...");
             });
 
             if(info.isNeed_update()){
                 try {
-                    this.updater.update(info, remoteInfo.get(info.getJar_name()));
+                    this.updater.update(info, remoteInfo.get(info.getFile_name()));
                 } catch (IOException e) {
                     Platform.runLater(() -> {
                         AlertUtils.getInstance().showException("Erro ao obter arquivo.",
-                                "Ocorreu um erro ao tentar baixar a última versão da aplicação \"" + info.getJar_name() + "\".\n" +
+                                "Ocorreu um erro ao tentar baixar a última versão da aplicação \"" + info.getFile_name() + "\".\n" +
                                 "A atualização irá continuar, mas um artefato desatualizado permanecerá localmente.", e);
                     });
                     e.printStackTrace();
@@ -91,7 +95,11 @@ public class LauncherMainController {
         }
     }
 
-    public static LauncherMainController getInstance() {
+    public Config getConfig() {
+        return config;
+    }
+
+    public static Controller getInstance() {
         return instance;
     }
 }

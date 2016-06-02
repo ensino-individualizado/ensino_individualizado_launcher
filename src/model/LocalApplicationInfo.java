@@ -5,24 +5,24 @@ package model;
  */
 public class LocalApplicationInfo implements Comparable<LocalApplicationInfo>{
 
-    private String jar_name = "";
-    private String jar_version = "";
+    private String file_name = "";
+    private String version = "";
     private transient boolean need_update = false;
 
-    public String getJar_name() {
-        return jar_name;
+    public String getFile_name() {
+        return file_name;
     }
 
-    public void setJar_name(String jar_name) {
-        this.jar_name = jar_name;
+    public void setFile_name(String file_name) {
+        this.file_name = file_name;
     }
 
-    public String getJar_version() {
-        return jar_version;
+    public String getVersion() {
+        return version;
     }
 
-    public void setJar_version(String jar_version) {
-        this.jar_version = jar_version;
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public boolean isNeed_update() {
@@ -38,21 +38,21 @@ public class LocalApplicationInfo implements Comparable<LocalApplicationInfo>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LocalApplicationInfo that = (LocalApplicationInfo) o;
-        return jar_name.equals(that.jar_name);
+        return file_name.equals(that.file_name);
     }
 
     @Override
     public int hashCode() {
-        return jar_name.hashCode();
+        return file_name.hashCode();
     }
 
     @Override
     public int compareTo(LocalApplicationInfo o) {
-        return (this.jar_name.compareTo(o.getJar_name()));
+        return (this.file_name.compareTo(o.getFile_name()));
     }
 
     public String toString(){
-        return ("jar_name:"+this.jar_name+",\n" +
-                "jar_version:"+this.jar_version+"\n");
+        return ("file_name: "+this.file_name+",\n" +
+                "version: "+this.version+"\n");
     }
 }

@@ -5,11 +5,15 @@
  */
 package tools;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import model.LocalApplicationInfo;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.HashMap;
 
 /**
  *
@@ -17,8 +21,7 @@ import java.net.URL;
  */
 public class FileManager {
 
-    public static final String localApplicationInfoFile = "local_application_info.json";
-    public static final String remoteApplicationRessources = "remote_application_ressources.json";
+    public static final String configurationFile = "ensino_individualizado_launcher_config.json";
 
     private final int BUFFER_LENGTH = 2048;
     
@@ -51,14 +54,18 @@ public class FileManager {
     public <T> T loadJsonAndParse(String filePath, Type typeOf) throws IOException {
         String json = this.load(filePath);
         if(json != null) {
-            Gson gson = new Gson();
-            JsonReader reader = new JsonReader(new StringReader(json));
-            reader.setLenient(true);
-            return (gson.fromJson(reader, typeOf));
+            return (this.parseJson(json, typeOf));
         }
         else{
             return (null);
         }
+    }
+
+    public void saveToJson(String filePath, Object obj, Type typeOfObj) throws IOException {
+        Gson gson = new Gson();
+        String str = gson.toJson(obj, typeOfObj);
+        InputStream is = new ByteArrayInputStream(Charset.forName("UTF-8").encode(str).array());
+        this.save(is, filePath);
     }
 
     public void save(String inputPath, String outputPath) throws IOException {
@@ -83,6 +90,13 @@ public class FileManager {
         fos.flush();
         fos.close();
         is.close();
+    }
+
+    public <T> T parseJson(String json, Type typeOf){
+        Gson gson = new Gson();
+        JsonReader reader = new JsonReader(new StringReader(json));
+        reader.setLenient(true);
+        return (gson.fromJson(reader, typeOf));
     }
 
     public boolean verifExistence(String filePath) {
