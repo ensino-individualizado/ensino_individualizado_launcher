@@ -6,6 +6,7 @@
 package control;
 
 import Visao.Administracao.AdministracaoController;
+import Visao.utils.AlertUtils;
 import com.google.gson.reflect.TypeToken;
 import javafx.application.Platform;
 import model.LocalApplicationInfo;
@@ -75,6 +76,11 @@ public class LauncherMainController {
                 try {
                     this.updater.update(info, remoteInfo.get(info.getJar_name()));
                 } catch (IOException e) {
+                    Platform.runLater(() -> {
+                        AlertUtils.getInstance().showException("Erro ao obter arquivo.",
+                                "Ocorreu um erro ao tentar baixar a última versão da aplicação \"" + info.getJar_name() + "\".\n" +
+                                "A atualização irá continuar, mas um artefato desatualizado permanecerá localmente.", e);
+                    });
                     e.printStackTrace();
                 }
             }
