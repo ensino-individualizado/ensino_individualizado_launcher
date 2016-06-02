@@ -6,18 +6,13 @@
 package control;
 
 import Visao.Administracao.AdministracaoController;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javafx.application.Platform;
 import model.LocalApplicationInfo;
 import model.RemoteApplicationInfo;
 import tools.FileManager;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**

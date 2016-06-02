@@ -62,8 +62,6 @@ public class FileManager {
     }
 
     public void save(String inputPath, String outputPath) throws IOException {
-        BufferedInputStream in = null;
-
         BufferedInputStream inputStream = new BufferedInputStream(new URL(inputPath).openStream());
         this.save(inputStream, outputPath, BUFFER_LENGTH);
     }

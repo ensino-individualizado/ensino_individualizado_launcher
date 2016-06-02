@@ -9,7 +9,6 @@ import Visao.Administracao.AdministracaoController;
 import control.LauncherMainController;
 import javafx.application.Platform;
 import javafx.stage.StageStyle;
-import tools.FileManager;
 import Visao.ControllerHierarchy.WindowController;
 import javafx.stage.Stage;
 

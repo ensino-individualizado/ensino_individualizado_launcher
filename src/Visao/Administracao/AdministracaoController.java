@@ -6,7 +6,6 @@
 package Visao.Administracao;
 
 import Visao.ControllerHierarchy.RegionController;
-import control.LauncherMainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;

@@ -2,16 +2,16 @@ package control;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import model.LocalApplicationInfo;
-import model.RemoteApplicationInfo;
-
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import sun.misc.IOUtils;
+import model.LocalApplicationInfo;
+import model.RemoteApplicationInfo;
 import tools.FileManager;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.util.HashMap;
@@ -50,8 +50,14 @@ public class Updater {
 
     public boolean needsUpdate(LocalApplicationInfo local, RemoteApplicationInfo remote){
         Gson gson = new Gson();
-        remote.setVersion(gson.fromJson(this.getRequest(remote.getName_url()), String.class));;
-        return (remote.getVersion().compareTo(local.getJar_version()) == 0 ? false : true);
+        remote.setVersion(gson.fromJson(this.getRequest(remote.getName_url()), String.class));
+        if(remote.getVersion() != null) {
+            return (remote.getVersion().compareTo(local.getJar_version()) == 0 ? false : true);
+        }
+        else{
+            //Remote é nulo quando o servidor não foram lançadas releases
+            return (false);
+        }
     }
 
     public void update(LocalApplicationInfo local, RemoteApplicationInfo remote) throws IOException {
