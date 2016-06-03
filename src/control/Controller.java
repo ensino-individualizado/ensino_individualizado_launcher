@@ -15,6 +15,7 @@ import model.RemoteApplicationInfo;
 import tools.FileManager;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 
 /**
@@ -26,22 +27,24 @@ public class Controller {
     private Config config;
     private final Updater updater = new Updater();
     private static Controller instance = new Controller();
+    private HashMap<String, LocalApplicationInfo> localInfo = null;
+    private HashMap<String, RemoteApplicationInfo> remoteInfo = null;
 
     public void startApplication(AdministracaoController aplicacao) throws Exception {
+
         Platform.runLater(() ->{
             aplicacao.setInfoString("Carregando arquivos de configuração...");
         });
 
         this.config = FileManager.getInstance().loadJsonAndParse(FileManager.configurationFile, new TypeToken<Config>(){}.getType());
 
-        HashMap<String, LocalApplicationInfo> localInfo =
-                FileManager.getInstance().loadJsonAndParse(config.local_data_location, new TypeToken<HashMap<String, LocalApplicationInfo>>(){}.getType());
+        this.loadLocalInfo();
 
-        HashMap<String, RemoteApplicationInfo> remoteInfo =
+        remoteInfo =
                 FileManager.getInstance().loadJsonAndParse(config.remote_data_location, new TypeToken<HashMap<String, RemoteApplicationInfo>>(){}.getType());
 
         if(remoteInfo == null){
-            throw new Exception("Arquivo de configurações não encontrado.");
+            throw new IOException("Arquivo de configurações não encontrado.");
         }
 
         if(localInfo == null){
@@ -79,7 +82,7 @@ public class Controller {
             if(info.isNeed_update()){
                 try {
                     this.updater.update(info, remoteInfo.get(info.getFile_name()));
-                } catch (IOException e) {
+                } catch (IOException | URISyntaxException e) {
                     Platform.runLater(() -> {
                         AlertUtils.getInstance().showException("Erro ao obter arquivo.",
                                 "Ocorreu um erro ao tentar baixar a última versão da aplicação \"" + info.getFile_name() + "\".\n" +
@@ -92,6 +95,16 @@ public class Controller {
             Platform.runLater(() ->{
                 aplicacao.setProgress(aplicacao.getProgress() + step);
             });
+        }
+    }
+
+    public void loadLocalInfo(){
+        try {
+            localInfo =
+                    FileManager.getInstance().loadJsonAndParse(config.local_data_location, new TypeToken<HashMap<String, LocalApplicationInfo>>() {}.getType());
+        }
+        catch (IOException e){
+            System.out.println("Não existem dados locais: " + e.getMessage());
         }
     }
 

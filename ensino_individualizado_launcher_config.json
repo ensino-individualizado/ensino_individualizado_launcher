@@ -1,6 +1,6 @@
 {
-	"remote_data_location": "remote_application_ressources.json",
-	"local_data_location": "local_application_info.json",
+	"remote_data_location": "https://ensino-individualizado-update-gustavofamorim.c9users.io/remote_application_ressources.json",
+	"local_data_location": "file:///D:/Repositórios/ensino_individualizado_launcher/local_application_info.json",
 	"launch_prefix": "java -jar ",
 	"application_arguments": ""
 }

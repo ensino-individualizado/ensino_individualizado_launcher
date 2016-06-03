@@ -6,6 +6,7 @@
 package main;
 
 import Visao.Administracao.AdministracaoController;
+import Visao.utils.AlertUtils;
 import control.Controller;
 import javafx.application.Platform;
 import javafx.stage.StageStyle;
@@ -46,6 +47,9 @@ public class LauncherWindow extends WindowController{
                 Controller.getInstance().startApplication((AdministracaoController)this.getRegionController());
             } catch (Exception e) {
                 e.printStackTrace();
+                AlertUtils.getInstance().showException("Erro ao obter arquivo.",
+                        "Ocorreu um erro ao tentar atualizar a aplicação.\n" +
+                        "Informe o Administrador sobre esse problema.", e);
                 Platform.exit();
             }
             finally {

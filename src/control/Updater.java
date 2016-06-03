@@ -10,6 +10,7 @@ import model.RemoteApplicationInfo;
 import tools.FileManager;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 
 /**
@@ -56,9 +57,8 @@ public class Updater {
         }
     }
 
-    public void update(LocalApplicationInfo local, RemoteApplicationInfo remote) throws IOException {
-        String downloadURL = FileManager.getInstance().parseJson(this.getRequest(remote.getDownload_url()), new TypeToken<String>(){}.getType());
-        //String downloadURL = FileManager.getInstance().loadJsonAndParse(remote.getDownload_url(), );
+    public void update(LocalApplicationInfo local, RemoteApplicationInfo remote) throws IOException, URISyntaxException {
+        String downloadURL = FileManager.getInstance().parseFromJson(this.getRequest(remote.getDownload_url()), new TypeToken<String>(){}.getType());
         FileManager.getInstance().save(downloadURL, local.getFile_name());
         local.setVersion(remote.getVersion());
     }
@@ -85,7 +85,7 @@ public class Updater {
         return (serverResult);
     }
 
-    public void saveLocalInfo(HashMap<String, LocalApplicationInfo> info) throws IOException {
+    public void saveLocalInfo(HashMap<String, LocalApplicationInfo> info) throws IOException, URISyntaxException {
         FileManager.getInstance().saveToJson(Controller.getInstance().getConfig().local_data_location, info, new TypeToken<HashMap<String, LocalApplicationInfo>>(){}.getType());
     }
 }
